@@ -15,6 +15,9 @@ export const Footer = () => {
           <a href="/contact" className="hover:text-primary transition-colors">
             Contact
           </a>
+          <a href="/backend" className="hover:text-primary transition-colors">
+            Backend
+          </a>
         </div>
       </div>
     </footer>
