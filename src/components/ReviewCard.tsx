@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { StarRating } from "./StarRating";
 import { Pencil, Trash2 } from "lucide-react";
 
@@ -11,6 +12,7 @@ interface ReviewCardProps {
     created_at: string;
     profiles: {
       name: string;
+      avatar_url?: string;
     };
   };
   isOwnReview?: boolean;
@@ -23,13 +25,19 @@ export const ReviewCard = ({ review, isOwnReview, onEdit, onDelete }: ReviewCard
     <Card>
       <CardHeader>
         <div className="flex items-start justify-between">
-          <div>
-            <h4 className="font-semibold text-lg">{review.profiles.name}</h4>
-            <div className="flex items-center gap-2 mt-1">
-              <StarRating rating={review.rating} size={16} />
-              <span className="text-sm text-muted-foreground">
-                {new Date(review.created_at).toLocaleDateString()}
-              </span>
+          <div className="flex items-center gap-3">
+            <Avatar>
+              <AvatarImage src={review.profiles.avatar_url} alt={review.profiles.name} />
+              <AvatarFallback>{review.profiles.name.charAt(0)}</AvatarFallback>
+            </Avatar>
+            <div>
+              <h4 className="font-semibold text-lg">{review.profiles.name}</h4>
+              <div className="flex items-center gap-2 mt-1">
+                <StarRating rating={review.rating} size={16} />
+                <span className="text-sm text-muted-foreground">
+                  {new Date(review.created_at).toLocaleDateString()}
+                </span>
+              </div>
             </div>
           </div>
           {isOwnReview && (

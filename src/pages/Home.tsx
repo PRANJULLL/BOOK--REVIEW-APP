@@ -31,6 +31,7 @@ const Home = () => {
   const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
   const [genreFilter, setGenreFilter] = useState("all");
   const [page, setPage] = useState(1);
   const [session, setSession] = useState<Session | null>(null);
@@ -52,8 +53,15 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchQuery(searchQuery);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
+  useEffect(() => {
     filterBooks();
-  }, [books, searchQuery, genreFilter]);
+  }, [books, debouncedSearchQuery, genreFilter]);
 
   const fetchBooks = async () => {
     try {
@@ -100,11 +108,11 @@ const Home = () => {
   const filterBooks = () => {
     let filtered = books;
 
-    if (searchQuery) {
+    if (debouncedSearchQuery) {
       filtered = filtered.filter(
         (book) =>
-          book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          book.author.toLowerCase().includes(searchQuery.toLowerCase())
+          book.title.toLowerCase().includes(debouncedSearchQuery.toLowerCase()) ||
+          book.author.toLowerCase().includes(debouncedSearchQuery.toLowerCase())
       );
     }
 
