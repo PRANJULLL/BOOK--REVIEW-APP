@@ -2,8 +2,8 @@ import React from "react";
 
 export const Footer = () => {
   const handleGitHubClick = () => {
-    window.open("https://github.com/PRANJULLL/BOOK-REVIEW-PLATFORM", "_blank");
-    alert("Opening GitHub repository...");
+    window.open("https://github.com/PRANJULLL", "_blank");
+    alert("Opening GitHub profile...");
   };
 
   const handleAboutClick = () => {
