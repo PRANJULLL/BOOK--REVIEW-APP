@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { BookCard } from "@/components/BookCard";
+import { BookCardSkeleton } from "@/components/BookCardSkeleton";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, Filter } from "lucide-react";
@@ -127,11 +128,11 @@ const Home = () => {
 
       <div className="container mx-auto px-4 py-8">
         {/* Hero Section */}
-        <div className="mb-12 text-center bg-[var(--gradient-hero)] rounded-2xl p-12 shadow-[var(--shadow-card)]">
-          <h1 className="text-5xl font-bold mb-4 text-foreground">
+        <div className="mb-8 sm:mb-12 text-center bg-[var(--gradient-hero)] rounded-2xl p-6 sm:p-8 md:p-12 shadow-[var(--shadow-card)] animate-fade-in">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 text-foreground animate-slide-up">
             Discover Your Next Great Read
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto animate-slide-up" style={{ animationDelay: '0.2s' }}>
             Share reviews, find recommendations, and connect with fellow book lovers
           </p>
         </div>
@@ -164,8 +165,10 @@ const Home = () => {
 
         {/* Books Grid */}
         {loading ? (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">Loading books...</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {[...Array(6)].map((_, i) => (
+              <BookCardSkeleton key={i} />
+            ))}
           </div>
         ) : currentBooks.length === 0 ? (
           <div className="text-center py-12">

@@ -139,14 +139,14 @@ const AddBook = () => {
       <Navbar user={session?.user} />
 
       <div className="container mx-auto px-4 py-8 max-w-2xl">
-        <Card>
+        <Card className="shadow-[var(--shadow-card)]">
           <CardHeader>
-            <CardTitle className="text-3xl">
+            <CardTitle className="text-2xl sm:text-3xl">
               {id ? "Edit Book" : "Add New Book"}
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="title">Title *</Label>
                 <Input

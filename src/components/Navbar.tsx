@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { ThemeToggle } from "./ThemeToggle";
 
 interface NavbarProps {
   user: any;
@@ -28,17 +29,18 @@ export const Navbar = ({ user }: NavbarProps) => {
   };
 
   return (
-    <nav className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+    <nav className="border-b bg-card/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 bg-[var(--gradient-primary)] rounded-lg flex items-center justify-center shadow-[var(--shadow-book)] group-hover:shadow-lg transition-shadow">
+          <Link to="/" className="flex items-center gap-2 group transition-transform duration-200 hover:scale-105">
+            <div className="w-10 h-10 bg-[var(--gradient-primary)] rounded-lg flex items-center justify-center shadow-[var(--shadow-book)] group-hover:shadow-lg group-hover:rotate-3 transition-all duration-300">
               <BookOpen className="w-5 h-5 text-primary-foreground" />
             </div>
-            <span className="text-2xl font-bold text-foreground">BookReview</span>
+            <span className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-200">BookReview</span>
           </Link>
 
           <div className="flex items-center gap-3">
+            <ThemeToggle />
             {user ? (
               <>
                 <Button asChild variant="default">
